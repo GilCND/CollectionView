@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		608DFB1326D3ED2500C12003 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 608DFB1126D3ED2500C12003 /* LaunchScreen.storyboard */; };
 		60BD29E926EFC80800E6F1BD /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BD29E826EFC80800E6F1BD /* ApiService.swift */; };
 		60BD29EB26EFC83700E6F1BD /* PlacesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BD29EA26EFC83700E6F1BD /* PlacesModel.swift */; };
+		60BD29EE26F0F57000E6F1BD /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 60BD29ED26F0F57000E6F1BD /* SDWebImage */; };
+		60BD29F026F0F57000E6F1BD /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 60BD29EF26F0F57000E6F1BD /* SDWebImageMapKit */; };
 		60E34DD426D575F100987C14 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E34DD326D575F100987C14 /* DetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,12 +43,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60BD29F026F0F57000E6F1BD /* SDWebImageMapKit in Frameworks */,
+				60BD29EE26F0F57000E6F1BD /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		60667C7026F229B2004ACF1D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				60667C7126F229BA004ACF1D /* Cell */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		60667C7126F229BA004ACF1D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				60162B3F26D426B800BB683B /* MyCollectionViewCell.xib */,
+				60162B3E26D426B800BB683B /* MyCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		608DFAFA26D3ED2400C12003 = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +87,7 @@
 		608DFB0526D3ED2400C12003 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				60667C7026F229B2004ACF1D /* UI */,
 				60BD29E726EFC7AE00E6F1BD /* Service */,
 				60BD29E626EFC79D00E6F1BD /* Model */,
 				608DFB0626D3ED2400C12003 /* AppDelegate.swift */,
@@ -76,8 +98,6 @@
 				608DFB0F26D3ED2500C12003 /* Assets.xcassets */,
 				608DFB1126D3ED2500C12003 /* LaunchScreen.storyboard */,
 				608DFB1426D3ED2500C12003 /* Info.plist */,
-				60162B3E26D426B800BB683B /* MyCollectionViewCell.swift */,
-				60162B3F26D426B800BB683B /* MyCollectionViewCell.xib */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -114,6 +134,10 @@
 			dependencies = (
 			);
 			name = CollectionView;
+			packageProductDependencies = (
+				60BD29ED26F0F57000E6F1BD /* SDWebImage */,
+				60BD29EF26F0F57000E6F1BD /* SDWebImageMapKit */,
+			);
 			productName = CollectionView;
 			productReference = 608DFB0326D3ED2400C12003 /* CollectionView.app */;
 			productType = "com.apple.product-type.application";
@@ -141,6 +165,9 @@
 				Base,
 			);
 			mainGroup = 608DFAFA26D3ED2400C12003;
+			packageReferences = (
+				60BD29EC26F0F57000E6F1BD /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 608DFB0426D3ED2400C12003 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -377,6 +404,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		60BD29EC26F0F57000E6F1BD /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		60BD29ED26F0F57000E6F1BD /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 60BD29EC26F0F57000E6F1BD /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		60BD29EF26F0F57000E6F1BD /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 60BD29EC26F0F57000E6F1BD /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 608DFAFB26D3ED2400C12003 /* Project object */;
 }

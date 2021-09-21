@@ -15,12 +15,14 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     let apiService = ApiService()
     final let jsonURL = "https://gist.githubusercontent.com/GilCND/e28acf7ad23f0ef02947f1d77d82226d/raw/ef8f147baf6b78123f08787ec076ee1d3e8130e4/collectionViewData.json"
     var places = [PlacesModel]()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,14 +63,7 @@ extension ViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.identifier, for: indexPath) as? MyCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let imageUrl = URL(string: places[indexPath.row].imageURL)
-        guard let imageUrl = imageUrl else {
-            print("Error image path is Nil")
-            return UICollectionViewCell()
-        }
-        let imageData = try! Data(contentsOf: imageUrl)
-        let thumbUiImage = UIImage(data: imageData)
-        cell.imageView.image = thumbUiImage
+        cell.configure(with: places[indexPath.row].imageURL, with: places[indexPath.row].id)
         
         return cell
     }
@@ -78,12 +73,47 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = view.frame.size.width / 4
-        let width = view.frame.size.width / 4
+        let width = view.frame.size.width / 3
         
         return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 35, left: 20, bottom: 0, right: 20)
+    }
+}
+extension UIImage {
+    func resizeImage(_ dimension: CGFloat, opaque: Bool, contentMode: UIView.ContentMode = .scaleAspectFit) -> UIImage {
+        var width: CGFloat
+        var height: CGFloat
+        var newImage: UIImage
+        
+        let size = self.size
+        let aspectRatio =  size.width/size.height
+        
+        switch contentMode {
+        case .scaleAspectFit:
+            if aspectRatio > 1 {                            // Landscape image
+                width = dimension
+                height = dimension / aspectRatio
+            } else {                                        // Portrait image
+                height = dimension
+                width = dimension * aspectRatio
+            }
+            
+        default:
+            fatalError("UIIMage.resizeToFit(): FATAL: Unimplemented ContentMode")
+        }
+        
+        let renderFormat = UIGraphicsImageRendererFormat.default()
+        renderFormat.opaque = opaque
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: width, height: height), format: renderFormat)
+        newImage = renderer.image {
+            (context) in
+            self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
+        }
+        
+        
+        return newImage
     }
 }
