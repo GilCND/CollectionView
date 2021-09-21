@@ -15,8 +15,9 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let image = UIImage(named: imageToLoad) else { return }
-         imageView.image = image
+        guard let image = URL(string: imageToLoad) else { return }
+        let imageData = try! Data(contentsOf: image)
+        imageView.image = UIImage(data: imageData)
         
     }
 }
